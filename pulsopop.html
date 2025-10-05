@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PULSO POP - Tu Fuente de Entretenimiento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #f093fb;
+        }
+
+        .admin-btn {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+        }
+
+        .admin-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            position: relative;
+            z-index: 1;
+            opacity: 0.95;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 3rem 0 2rem;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #f093fb);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .news-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .news-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .news-date {
+            color: #999;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(245, 87, 108, 0.9);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .news-card:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .delete-btn:hover {
+            background: #f5576c;
+        }
+
+        /* Ad Spaces */
+        .ad-space {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+            border: 2px dashed #667eea;
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            margin: 3rem 0;
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Admin Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 3000;
+            animation: slideIn 0.3s ease;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">⚡ PULSO POP</div>
+            <ul class="nav-links">
+                <li><a href="#novedades">Novedades</a></li>
+                <li><a href="#evergreen">Evergreen</a></li>
+                <li><button class="admin-btn" onclick="openAdmin()">✏️ Panel Admin</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Tu Pulso en el Mundo del Entretenimiento</h1>
+        <p>Descubre las últimas novedades y contenido que nunca pasa de moda</p>
+    </section>
+
+    <div class="container">
+        <div class="ad-space">
+            📢 ESPACIO PUBLICITARIO 728x90 - Google AdSense
+        </div>
+
+        <h2 class="section-title" id="novedades">🔥 Novedades Diarias</h2>
+        <div class="news-grid" id="dailyNews"></div>
+
+        <div class="ad-space">
+            💰 ESPACIO PARA ENLACES DE AFILIADOS - Amazon
+        </div>
+
+        <h2 class="section-title" id="evergreen">⭐ Contenido Evergreen</h2>
+        <div class="news-grid" id="evergreenNews"></div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 PULSO POP. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Admin Modal -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content">
+            <h2>📝 Panel de Administración</h2>
+            <form id="newsForm">
+                <div class="form-group">
+                    <label>Tipo de Contenido</label>
+                    <select id="newsType" required>
+                        <option value="daily">Novedad Diaria</option>
+                        <option value="evergreen">Contenido Evergreen</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Emoji/Icono</label>
+                    <input type="text" id="newsIcon" placeholder="🎬" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Categoría (Badge)</label>
+                    <input type="text" id="newsBadge" placeholder="HOY, MÚSICA, SERIE, etc." required>
+                </div>
+
+                <div class="form-group">
+                    <label>Título</label>
+                    <input type="text" id="newsTitle" placeholder="Título del artículo" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Descripción</label>
+                    <textarea id="newsDescription" placeholder="Descripción breve del contenido" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <input type="text" id="newsDate" placeholder="5 de octubre, 2025" required>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">✅ Publicar</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeAdmin()">❌ Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        ✅ ¡Contenido publicado exitosamente!
+    </div>
+
+    <script>
+        // Datos iniciales
+        let dailyArticles = [
+            {
+                icon: '🎥',
+                badge: 'HOY',
+                title: 'Estreno de la Semana',
+                description: 'La película más esperada del año finalmente llega a los cines. Críticos la califican como revolucionaria.',
+                date: '5 de octubre, 2025'
+            },
+            {
+                icon: '🎵',
+                badge: 'MÚSICA',
+                title: 'Nuevo Álbum Sorpresa',
+                description: 'Artista revela álbum sin previo aviso y rompe récords en plataformas de streaming.',
+                date: '4 de octubre, 2025'
+            },
+            {
+                icon: '📺',
+                badge: 'SERIES',
+                title: 'Serie Confirmada',
+                description: 'La serie más esperada confirma su renovación para una tercera temporada.',
+                date: '3 de octubre, 2025'
+            }
+        ];
+
+        let evergreenArticles = [
+            {
+                icon: '🎬',
+                badge: 'GUÍA',
+                title: 'Top 10 Películas Clásicas',
+                description: 'Las películas que todo cinéfilo debe ver al menos una vez en su vida.',
+                date: 'Contenido atemporal'
+            },
+            {
+                icon: '🎮',
+                badge: 'GAMING',
+                title: 'Mejores Juegos de la Historia',
+                description: 'Los títulos que revolucionaron la industria y siguen siendo relevantes.',
+                date: 'Contenido atemporal'
+            },
+            {
+                icon: '📚',
+                badge: 'LIBROS',
+                title: 'Libros que Inspiran',
+                description: 'Literatura que trasciende el tiempo y continúa inspirando generaciones.',
+                date: 'Contenido atemporal'
+            }
+        ];
+
+        // Cargar artículos guardados
+        function loadArticles() {
+            const savedDaily = JSON.parse(localStorage.getItem('dailyArticles') || '[]');
+            const savedEvergreen = JSON.parse(localStorage.getItem('evergreenArticles') || '[]');
+            
+            if (savedDaily.length > 0) dailyArticles = savedDaily;
+            if (savedEvergreen.length > 0) evergreenArticles = savedEvergreen;
+            
+            renderArticles();
+        }
+
+        // Guardar artículos
+        function saveArticles() {
+            localStorage.setItem('dailyArticles', JSON.stringify(dailyArticles));
+            localStorage.setItem('evergreenArticles', JSON.stringify(evergreenArticles));
+        }
+
+        // Renderizar artículos
+        function renderArticles() {
+            const dailyContainer = document.getElementById('dailyNews');
+            const evergreenContainer = document.getElementById('evergreenNews');
+
+            dailyContainer.innerHTML = dailyArticles.map((article, index) => `
+                <div class="news-card">
+                    <button class="delete-btn" onclick="deleteArticle('daily', ${index})">🗑️ Eliminar</button>
+                    <div class="news-image">${article.icon}</div>
+                    <div class="news-content">
+                        <span class="news-badge">${article.badge}</span>
+                        <h3 class="news-title">${article.title}</h3>
+                        <p class="news-description">${article.description}</p>
+                        <span class="news-date">${article.date}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            evergreenContainer.innerHTML = evergreenArticles.map((article, index) => `
+                <div class="news-card">
+                    <button class="delete-btn" onclick="deleteArticle('evergreen', ${index})">🗑️ Eliminar</button>
+                    <div class="news-image">${article.icon}</div>
+                    <div class="news-content">
+                        <span class="news-badge">${article.badge}</span>
+                        <h3 class="news-title">${article.title}</h3>
+                        <p class="news-description">${article.description}</p>
+                        <span class="news-date">${article.date}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Abrir/Cerrar modal admin
+        function openAdmin() {
+            document.getElementById('adminModal').classList.add('active');
+        }
+
+        function closeAdmin() {
+            document.getElementById('adminModal').classList.remove('active');
+            document.getElementById('newsForm').reset();
+        }
+
+        // Eliminar artículo
+        function deleteArticle(type, index) {
+            if (confirm('¿Estás seguro de eliminar este artículo?')) {
+                if (type === 'daily') {
+                    dailyArticles.splice(index, 1);
+                } else {
+                    evergreenArticles.splice(index, 1);
+                }
+                saveArticles();
+                renderArticles();
+                showSuccess('Artículo eliminado');
+            }
+        }
+
+        // Mostrar mensaje de éxito
+        function showSuccess(message) {
+            const msg = document.getElementById('successMessage');
+            msg.textContent = `✅ ${message}`;
+            msg.classList.add('show');
+            setTimeout(() => {
+                msg.classList.remove('show');
+            }, 3000);
+        }
+
+        // Manejar formulario
+        document.getElementById('newsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const newArticle = {
+                icon: document.getElementById('newsIcon').value,
+                badge: document.getElementById('newsBadge').value,
+                title: document.getElementById('newsTitle').value,
+                description: document.getElementById('newsDescription').value,
+                date: document.getElementById('newsDate').value
+            };
+
+            const type = document.getElementById('newsType').value;
+
+            if (type === 'daily') {
+                dailyArticles.unshift(newArticle);
+            } else {
+                evergreenArticles.unshift(newArticle);
+            }
+
+            saveArticles();
+            renderArticles();
+            closeAdmin();
+            showSuccess('¡Contenido publicado exitosamente!');
+        });
+
+        // Cerrar modal al hacer clic fuera
+        document.getElementById('adminModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAdmin();
+            }
+        });
+
+        // Cargar artículos al iniciar
+        loadArticles();
+    </script>
+</body>
+</html>
